@@ -1,47 +1,91 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
 }
 
-.chat-container {
-    width: 600px;
-    margin: 50px auto;
-    background: #fff;
+#chat-container {
+    width: 400px;
+    background: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+#user-section, #chat-section {
+    padding: 20px;
 }
 
 #chat-box {
-    height: 400px;
+    height: 300px;
     overflow-y: auto;
+    border-bottom: 1px solid #ddd;
     padding: 10px;
-    border-bottom: 1px solid #ccc;
 }
 
-.input-container {
+#chat-input-area {
     display: flex;
-    padding: 10px;
 }
 
-input[type="text"] {
+#chat-input {
     flex: 1;
     padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
 }
 
-button {
+#send-btn {
     padding: 10px 15px;
     border: none;
-    background-color: #5cb85c;
+    background-color: #4CAF50;
     color: white;
-    border-radius: 4px;
     cursor: pointer;
+    border-radius: 0 4px 4px 0;
 }
 
-button:hover {
-    background-color: #4cae4c;
+/* মেসেজ স্টাইলিং */
+.message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message .user-icon {
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.message .message-text {
+    max-width: 70%;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+/* নিজের মেসেজ ডান পাশে */
+.my-message {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.my-message .message-text {
+    background-color: #daf8e3;
+    color: #333;
+}
+
+/* অন্যান্যদের মেসেজ বাম পাশে */
+.other-message .message-text {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+/* সিস্টেম মেসেজ */
+.system-message {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+    margin: 10px 0;
 }
