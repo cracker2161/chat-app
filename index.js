@@ -6,21 +6,23 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-app.use(express.static('public')); // Assuming your HTML/CSS/JS are in the 'public' folder
+app.use(express.static('public'));
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    socket.on('joinChat', (username) => {
+        socket.username = username;
+        socket.broadcast.emit('systemMessage', `${username} has joined the chat`);
+    });
 
-    socket.on('chat message', (data) => {
-        io.emit('chat message', data);
+    socket.on('chatMessage', (data) => {
+        const time = new Date().toLocaleTimeString();
+        io.emit('chatMessage', { username: data.username, message: data.message, time });
     });
 
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        io.emit('systemMessage', `${socket.username} has left the chat`);
     });
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
