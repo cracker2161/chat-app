@@ -1,48 +1,42 @@
-const socket = io();
+const socket = io(); // Assuming you're using socket.io
+const chatBox = document.getElementById('chat-box');
+const messageInput = document.getElementById('message');
+const sendButton = document.getElementById('send-btn');
+const nameInput = document.getElementById('name');
+const joinButton = document.getElementById('join-btn');
+const inputContainer = document.querySelector('.input-container');
 
-let username = '';
+let userName = '';
 
-function joinChat() {
-    username = document.getElementById('username').value.trim();
-    if (username) {
-        document.getElementById('user-section').style.display = 'none';
-        document.getElementById('chat-section').style.display = 'block';
-        socket.emit('joinChat', username);
+// Function to join chat
+joinButton.addEventListener('click', () => {
+    const name = nameInput.value.trim();
+    if (name) {
+        userName = name;
+        document.getElementById('name-container').style.display = 'none';
+        chatBox.style.display = 'block';
+        inputContainer.style.display = 'flex'; // Show input container
     } else {
-        alert('Please enter a username');
+        alert('Please enter your name');
     }
-}
-
-function sendMessage() {
-    const message = document.getElementById('chat-input').value.trim();
-    if (message) {
-        socket.emit('chatMessage', { username, message });
-        displayMessage(username, message, true);  // নিজের মেসেজ ডান পাশে দেখানো
-        document.getElementById('chat-input').value = '';
-    }
-}
-
-// মেসেজ রিসিভ এবং ডান-বাম অ্যাডজাস্ট
-socket.on('chatMessage', (data) => {
-    const { username: sender, message, time } = data;
-    displayMessage(sender, message, sender === username);
 });
 
-function displayMessage(sender, message, isMyMessage) {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message', isMyMessage ? 'my-message' : 'other-message');
-    messageElement.innerHTML = `
-        <span class="user-icon"><i class="fas fa-user"></i></span>
-        <span class="message-text"><strong>${sender}</strong>: ${message}</span>
-    `;
-    document.getElementById('chat-box').appendChild(messageElement);
-    document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
-}
+// Function to send message
+sendButton.addEventListener('click', () => {
+    const message = messageInput.value.trim();
 
-// সিস্টেম নোটিফিকেশন
-socket.on('systemMessage', (msg) => {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('system-message');
-    messageElement.textContent = msg;
-    document.getElementById('chat-box').appendChild(messageElement);
+    if (userName && message) {
+        socket.emit('chat message', { name: userName, message });
+        messageInput.value = '';
+    } else {
+        alert('Please enter a message');
+    }
+});
+
+// Function to receive messages
+socket.on('chat message', ({ name, message }) => {
+    const newMessage = document.createElement('div');
+    newMessage.innerHTML = `<i class="fas fa-user"></i> ${name}: ${message}`;
+    chatBox.appendChild(newMessage);
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
 });
