@@ -1,91 +1,47 @@
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-#chat-container {
-    width: 400px;
-    background: white;
+.chat-container {
+    width: 600px;
+    margin: 50px auto;
+    background: #fff;
     border-radius: 8px;
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-}
-
-#user-section, #chat-section {
-    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #chat-box {
-    height: 300px;
+    height: 400px;
     overflow-y: auto;
-    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.input-container {
+    display: flex;
     padding: 10px;
 }
 
-#chat-input-area {
-    display: flex;
-}
-
-#chat-input {
+input[type="text"] {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px 0 0 4px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-#send-btn {
+button {
     padding: 10px 15px;
     border: none;
-    background-color: #4CAF50;
+    background-color: #5cb85c;
     color: white;
+    border-radius: 4px;
     cursor: pointer;
-    border-radius: 0 4px 4px 0;
 }
 
-/* মেসেজ স্টাইলিং */
-.message {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.message .user-icon {
-    font-size: 16px;
-    margin-right: 8px;
-}
-
-.message .message-text {
-    max-width: 70%;
-    padding: 8px;
-    border-radius: 8px;
-}
-
-/* নিজের মেসেজ ডান পাশে */
-.my-message {
-    flex-direction: row-reverse;
-    text-align: right;
-}
-
-.my-message .message-text {
-    background-color: #daf8e3;
-    color: #333;
-}
-
-/* অন্যান্যদের মেসেজ বাম পাশে */
-.other-message .message-text {
-    background-color: #f1f1f1;
-    color: #333;
-}
-
-/* সিস্টেম মেসেজ */
-.system-message {
-    text-align: center;
-    font-style: italic;
-    color: #999;
-    margin: 10px 0;
+button:hover {
+    background-color: #4cae4c;
 }
