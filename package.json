@@ -1,8 +1,9 @@
 {
   "name": "nodejs",
   "version": "1.0.0",
-  "main": "node server.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",  // এই লাইনটি যুক্ত করুন
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
